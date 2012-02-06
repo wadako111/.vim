@@ -28,3 +28,6 @@ set t_Co=256
 filetype on
 filetype indent on
 filetype plugin on
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
+let g:rubycomplete_rails = 1
