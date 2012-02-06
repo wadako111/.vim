@@ -25,3 +25,6 @@ set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
+filetype on
+filetype indent on
+filetype plugin on
