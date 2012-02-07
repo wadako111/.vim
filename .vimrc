@@ -25,9 +25,7 @@ set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
-filetype on
-filetype indent on
-filetype plugin on
+
 setlocal omnifunc=syntaxcomplete#Complete
 
 "ruby補完
@@ -36,4 +34,5 @@ let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
 "autocomplpopを無効
-"let g:AutoComplPop_NotEnableAtStartup = 1
+let g:acp_enableAtStartup = 0
+
