@@ -25,6 +25,7 @@ set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
+set backspace=indent,eol,start
 
 setlocal omnifunc=syntaxcomplete#Complete
 
@@ -36,3 +37,9 @@ let g:rubycomplete_rails = 1
 "autocomplpopを無効
 let g:acp_enableAtStartup = 0
 
+"neocompcacheを有効
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
