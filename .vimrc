@@ -26,7 +26,7 @@ set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
 set backspace=indent,eol,start
-set shiftwid=2
+set shiftwidth=2
 
 setlocal omnifunc=syntaxcomplete#Complete
 
