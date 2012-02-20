@@ -5,4 +5,8 @@ let g:netrw_dirhist_2='/Users/wadako111/.vim'
 let g:netrw_dirhist_3='/Users/wadako111/Documents/rails/fashion/app'
 let g:netrw_dirhist_4='/Users/wadako/.vim'
 let g:netrw_dirhist_5='/Users/wadako111/.vim'
+<<<<<<< HEAD
 let g:netrw_dirhist_6='/Users/wadako111/Documents/rails-source/rails/actionpack/lib/action_controller/metal'
+=======
+let g:netrw_dirhist_6='/home/wadako/.vim'
+>>>>>>> f6742acda3f1802953328ca69099af79423641c4
