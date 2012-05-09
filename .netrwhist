@@ -5,7 +5,14 @@ let g:netrw_dirhist_2='/Users/wadako111/.vim'
 let g:netrw_dirhist_3='/Users/wadako111/Documents/rails/fashion/app'
 let g:netrw_dirhist_4='/Users/wadako/.vim'
 let g:netrw_dirhist_5='/Users/wadako111/.vim'
+<<<<<<< HEAD
+let g:netrw_dirhist_6='/Users/wadako111/Documents/rails-source/rails/actionpack/lib/action_controller/metal'
+=======
 let g:netrw_dirhist_6='/home/wadako/.vim'
+<<<<<<< HEAD
 let g:netrw_dirhist_7='/home/wadako/workspace/rails/fashion_serever/.git'
 let g:netrw_dirhist_8='/etc/apache2/sites-available'
 let g:netrw_dirhist_9='/home/wadako/tmp/gitosis-admin/keydir'
+=======
+>>>>>>> f6742acda3f1802953328ca69099af79423641c4
+>>>>>>> 80a434da492d4060a69d7f2b933c594d2c0c0e35
