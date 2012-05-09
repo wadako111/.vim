@@ -45,3 +45,8 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_auto_select = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
