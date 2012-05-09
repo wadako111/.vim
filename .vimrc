@@ -43,14 +43,9 @@ let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 "let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_auto_select = 1
-<<<<<<< HEAD
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
 "
 ""<C-Space>でomni補完
 imap <C-Space> <C-x><C-o>
-
-=======
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 
@@ -58,4 +53,3 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
->>>>>>> 80a434da492d4060a69d7f2b933c594d2c0c0e35
