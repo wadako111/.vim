@@ -1,8 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/wadako111/Documents/iphone/fashion/.git'
 let g:netrw_dirhist_2='/Users/wadako111/.vim'
 let g:netrw_dirhist_3='/Users/wadako111/Documents/rails/fashion/app'
 let g:netrw_dirhist_4='/Users/wadako/.vim'
 let g:netrw_dirhist_5='/Users/wadako111/.vim'
 let g:netrw_dirhist_6='/home/wadako/.vim'
+let g:netrw_dirhist_7='/home/wadako/workspace/rails/fashion_serever/.git'
+let g:netrw_dirhist_8='/etc/apache2/sites-available'
+let g:netrw_dirhist_9='/home/wadako/tmp/gitosis-admin/keydir'

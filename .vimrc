@@ -28,7 +28,7 @@ set t_Co=256
 set backspace=indent,eol,start
 set shiftwidth=2
 
-setlocal omnifunc=syntaxcomplete#Complete
+"setlocal omnifunc=syntaxcomplete#Complete
 
 "ruby補完
 let g:rubycomplete_buffer_loading = 1
@@ -40,7 +40,11 @@ let g:acp_enableAtStartup = 0
 
 "neocompcacheを有効
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"
+""<C-Space>でomni補完
+imap <C-Space> <C-x><C-o>
+
