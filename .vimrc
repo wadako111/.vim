@@ -28,6 +28,7 @@ set t_Co=256
 set backspace=indent,eol,start
 " タブ幅
 set shiftwidth=4
+set tabstop=4
 
 "setlocal omnifunc=syntaxcomplete#Complete
 
