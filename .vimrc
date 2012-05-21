@@ -1,13 +1,10 @@
-syntax on
+set nocompatible
 set autoindent
 set expandtab
 set list
 set number
 set showmatch
 set smartindent
-colorscheme railscasts
-set nocompatible
-filetype indent plugin on
 set hidden
 set wildmenu
 set showcmd
@@ -29,30 +26,30 @@ set backspace=indent,eol,start
 " タブ幅
 set shiftwidth=4
 set tabstop=4
+filetype off
 
-"setlocal omnifunc=syntaxcomplete#Complete
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-"ruby補完
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
-
-"autocomplpopを無効
-let g:acp_enableAtStartup = 0
-
-"neocompcacheを有効
+Bundle 'qmarik/vundle'
+Bundle 'tpope/vim-rails.git'
+Bundle 'Railscasts-Theme-GUIand256color'
+colorscheme railscasts
+Bundle 'ZenCoding.vim'
+Bundle 'EnhCommentify.vim'
+Bundle 'Shougo/neocomplcache'
 let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
-"
-""<C-Space>でomni補完
-imap <C-Space> <C-x><C-o>
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
+inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplcache_enable_smart_case = 1
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+Bundle 'scrooloose/nerdtree'
 
-set noswapfile
+filetype plugin indent on
+
