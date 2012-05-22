@@ -24,6 +24,8 @@ set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
 set backspace=indent,eol,start
+" swapファイルを作成しない
+set noswapfile
 " タブ幅
 set shiftwidth=4
 set tabstop=4
@@ -63,9 +65,19 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+"scssでcssの補完を有効にする
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\|[@!]'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'sudo.vim'
+Bundle 'surround.vim'
+Bundle 'vim-ruby/vim-ruby'
+let ruby_space_errors=1
 
 filetype plugin indent on
-
+filetype on
