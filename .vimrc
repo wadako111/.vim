@@ -27,6 +27,20 @@ set backspace=indent,eol,start
 " タブ幅
 set shiftwidth=4
 set tabstop=4
+" 全角スペースを視覚化
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=white
+match ZenkakuSpace /　/
+
+" スペースもマッピングされるためコメントは横に記述しません。
+" nmap ノーマルモードのキーマップ
+" nnoremap ノーマルモードのキーマップ (ただし再帰的にキーマップを追いません)
+" imap インサートモードのキーマップ
+"
+imap <C-j> <Down>
+imap <C-k> <Up>
+imap <C-h> <Left>
+imap <C-l> <Right>
+
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
@@ -51,6 +65,7 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_enable_smart_case = 1
 
 Bundle 'scrooloose/nerdtree'
+Bundle 'sudo.vim'
 
 filetype plugin indent on
 
