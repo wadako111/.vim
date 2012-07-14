@@ -78,6 +78,10 @@ Bundle 'sudo.vim'
 Bundle 'surround.vim'
 Bundle 'vim-ruby/vim-ruby'
 let ruby_space_errors=1
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'thinca/vim-quickrun.git'
+let g:quickrun_config = {}
+let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
 
 filetype plugin indent on
 filetype on
