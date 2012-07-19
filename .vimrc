@@ -42,6 +42,8 @@ imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-h> <Left>
 imap <C-l> <Right>
+nnoremap j gj
+nnoremap k gk
 
 filetype off
 
@@ -82,6 +84,8 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'thinca/vim-quickrun.git'
 let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+Bundle 'tpope/vim-endwise.git'
+Bundle 'mru.vim'
 
 filetype plugin indent on
 filetype on
