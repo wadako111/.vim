@@ -45,6 +45,10 @@ imap <C-l> <Right>
 nnoremap j gj
 nnoremap k gk
 
+" indentで折りたたみをする
+set foldmethod=indent
+set foldlevel=100
+
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
@@ -62,13 +66,13 @@ inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 "Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
+"if !exists('g:neocomplcache_omni_patterns')
+"    let g:neocomplcache_omni_patterns = {}
+"endif
+"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
 "scssでcssの補完を有効にする
 if !exists('g:neocomplcache_omni_patterns')
     let g:neocomplcache_omni_patterns = {}
@@ -86,6 +90,16 @@ let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
 Bundle 'tpope/vim-endwise.git'
 Bundle 'mru.vim'
+Bundle 'othree/html5.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
+let g:indent_guides_enable_on_vim_startup = 1
+set ts=2 sw=2 et
+Bundle 'briancollins/vim-jst.git'
+Bundle 'fholgado/minibufexpl.vim.git'
 
 filetype plugin indent on
 filetype on
