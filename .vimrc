@@ -99,7 +99,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
 let g:indent_guides_enable_on_vim_startup = 1
 set ts=2 sw=2 et
 Bundle 'briancollins/vim-jst.git'
-Bundle 'fholgado/minibufexpl.vim.git'
 
 filetype plugin indent on
 filetype on
