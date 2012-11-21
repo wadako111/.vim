@@ -49,6 +49,15 @@ nnoremap k gk
 set foldmethod=indent
 set foldlevel=100
 
+"custom statusline
+set statusline=%<%f\
+set stl+=[%{&ff}]             " show fileformat
+set stl+=%y%m%r%=
+set stl+=%-14.(%l,%c%V%)\ %P
+
+" scroll offset
+set scrolloff=10
+
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
@@ -100,6 +109,17 @@ let g:indent_guides_enable_on_vim_startup = 1
 set ts=2 sw=2 et
 Bundle 'briancollins/vim-jst.git'
 Bundle 'wadako111/say.vim'
+Bundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert = 1
+let g:unite_enable_split_vertically = 0
+let g:unite_winwidth = 40
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+
+Bundle 'Shougo/vimshell'
+Bundle 'Shougo/vimproc'
 
 filetype plugin indent on
 filetype on
