@@ -1,3 +1,12 @@
+"-------------------------------------------------------------------------------
+" コマンド       ノーマルモード 挿入モード コマンドラインモード ビジュアルモード
+" map/noremap           @            -              -                  @
+" nmap/nnoremap         @            -              -                  -
+" imap/inoremap         -            @              -                  -
+" cmap/cnoremap         -            -              @                  -
+" vmap/vnoremap         -            -              -                  @
+" map!/noremap!         -            @              @                  -
+"---------------------------------------------------------------------------
 syntax on
 set nocompatible
 set autoindent
@@ -116,7 +125,9 @@ let g:unite_winwidth = 40
 " バッファ一覧
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file_rec<CR>
+nnoremap <silent> ,uj :<C-u>Unite file_rec -input=app/assets/javascripts/backbone <CR>
+nnoremap <silent> ,ut :<C-u>Unite -buffer-name=files buffer file_mru file_rec/async file/new  <CR>
 
 Bundle 'Shougo/vimshell'
 Bundle 'Shougo/vimproc'
