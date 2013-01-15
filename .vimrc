@@ -59,7 +59,8 @@ set foldmethod=indent
 set foldlevel=100
 
 "custom statusline
-set statusline=%<%f\
+"set statusline=%<%f\
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}
 set stl+=[%{&ff}]             " show fileformat
 set stl+=%y%m%r%=
 set stl+=%-14.(%l,%c%V%)\ %P
@@ -122,12 +123,15 @@ Bundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert = 1
 let g:unite_enable_split_vertically = 0
 let g:unite_winwidth = 40
+call unite#custom_source('file_rec', 'ignore_pattern', 'vendor/\|tmp\|log')
 " バッファ一覧
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file_rec<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,uj :<C-u>Unite file_rec -input=app/assets/javascripts/backbone <CR>
 nnoremap <silent> ,ut :<C-u>Unite -buffer-name=files buffer file_mru file_rec/async file/new  <CR>
+
+Bundle 'tpope/vim-fugitive'
 
 Bundle 'Shougo/vimshell'
 Bundle 'Shougo/vimproc'
