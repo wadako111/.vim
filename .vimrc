@@ -103,7 +103,7 @@ Bundle 'sudo.vim'
 Bundle 'surround.vim'
 Bundle 'vim-ruby/vim-ruby'
 let ruby_space_errors=1
-Bundle 'kchmck/vim-coffee-script'
+Bundle 'wadako111/vim-coffee-script'
 Bundle 'thinca/vim-quickrun.git'
 let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
@@ -130,11 +130,14 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,uj :<C-u>Unite file_rec -input=app/assets/javascripts/backbone <CR>
 nnoremap <silent> ,ut :<C-u>Unite -buffer-name=files buffer file_mru file_rec/async file/new  <CR>
+nnoremap <silent> ,um :<C-u>Unite  file_mru <CR>
 
 Bundle 'tpope/vim-fugitive'
 
 Bundle 'Shougo/vimshell'
 Bundle 'Shougo/vimproc'
+
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on
 filetype on
