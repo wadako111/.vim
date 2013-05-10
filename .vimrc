@@ -68,18 +68,26 @@ set stl+=%-14.(%l,%c%V%)\ %P
 " scroll offset
 set scrolloff=10
 
+" jump to same indent line
+nn <C-k> k:call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
+nn <C-j> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^
+
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle'))
 
-Bundle 'qmarik/vundle'
-Bundle 'tpope/vim-rails.git'
-Bundle 'Railscasts-Theme-GUIand256color'
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'tpope/vim-rails.git'
+NeoBundle 'Railscasts-Theme-GUIand256color'
 colorscheme railscasts
-Bundle 'ZenCoding.vim'
-Bundle 'EnhCommentify.vim'
-Bundle 'Shougo/neocomplcache'
+NeoBundle 'ZenCoding.vim'
+NeoBundle 'EnhCommentify.vim'
+NeoBundle 'Shougo/neocomplcache'
 let g:neocomplcache_enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -98,28 +106,28 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\|[@!]'
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'sudo.vim'
-Bundle 'surround.vim'
-Bundle 'vim-ruby/vim-ruby'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'sudo.vim'
+NeoBundle 'surround.vim'
+NeoBundle 'vim-ruby/vim-ruby'
 let ruby_space_errors=1
-Bundle 'wadako111/vim-coffee-script'
-Bundle 'thinca/vim-quickrun.git'
+NeoBundle 'wadako111/vim-coffee-script'
+NeoBundle 'thinca/vim-quickrun.git'
 let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
-Bundle 'tpope/vim-endwise.git'
-Bundle 'mru.vim'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'nathanaelkane/vim-indent-guides.git'
+NeoBundle 'tpope/vim-endwise.git'
+NeoBundle 'mru.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'nathanaelkane/vim-indent-guides.git'
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=233
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
 let g:indent_guides_enable_on_vim_startup = 1
 set ts=2 sw=2 et
-Bundle 'briancollins/vim-jst.git'
-Bundle 'wadako111/say.vim'
-Bundle 'Shougo/unite.vim'
+NeoBundle 'briancollins/vim-jst.git'
+NeoBundle 'wadako111/say.vim'
+NeoBundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert = 1
 let g:unite_enable_split_vertically = 0
 let g:unite_winwidth = 40
@@ -128,16 +136,32 @@ call unite#custom_source('file_rec', 'ignore_pattern', 'vendor/\|tmp\|log')
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 " ファイル一覧
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,uj :<C-u>Unite file_rec -input=app/assets/javascripts/backbone <CR>
+nnoremap <silent> ,uj :<C-u>Unite file_rec -input=app/assets/javascripts <CR>
 nnoremap <silent> ,ut :<C-u>Unite -buffer-name=files buffer file_mru file_rec/async file/new  <CR>
 nnoremap <silent> ,um :<C-u>Unite  file_mru <CR>
 
-Bundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-fugitive'
 
-Bundle 'Shougo/vimshell'
-Bundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
 
-Bundle 'kien/ctrlp.vim'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+" rsense in neocomplcache
+"let g:neocomplcache#sources#rsense#home_directory = '/home/wadako/rsense-0.3'
+"NeoBundle 'Shougo/neocomplcache-rsense', {
+"            \ 'depends' : 'Shougo/neocomplcache',
+"            \ 'autoload' : { 'filetypes' : 'ruby' }
+"          \ }
+"let g:rsenseUseOmniFunc = 1
 
 filetype plugin indent on
 filetype on
+NeoBundleCheck
