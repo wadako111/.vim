@@ -230,6 +230,14 @@ map <silent> sP :call YanktmpPaste_P()<CR>
 NeoBundle 'yuratomo/w3m.vim'
 NeoBundle "basyura/unite-rails"
 
+"haskell
+NeoBundleLazy "dag/vim2hs",                  {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "eagletmt/ghcmod-vim",         {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "eagletmt/unite-haddock",      {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "ujihisa/neco-ghc",            {"autoload" : { "filetypes" : ["haskell"] }}
+NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
+autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+
 filetype plugin indent on
 filetype on
 NeoBundleCheck
