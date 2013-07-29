@@ -132,8 +132,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'tpope/vim-rails.git'
 NeoBundle 'Railscasts-Theme-GUIand256color'
 colorscheme railscasts
-NeoBundleLazy 'ZenCoding.vim', { 'autoload' : {
-    \ 'filetypes' : ['eruby', 'scss', 'css', 'html']
+NeoBundleLazy 'ZenCoding.vim', 'abdc4cf2062e546dab80ea53d2feb4118d00c5d8', { 'autoload' : {
+    \ 'filetypes' : ['eruby', 'scss', 'css', 'html'],
     \ }}
 
 NeoBundle 'EnhCommentify.vim'
