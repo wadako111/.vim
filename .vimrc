@@ -47,8 +47,6 @@ match ZenkakuSpace /　/
 " nnoremap ノーマルモードのキーマップ (ただし再帰的にキーマップを追いません)
 " imap インサートモードのキーマップ
 "
-imap <C-j> <Down>
-imap <C-k> <Up>
 imap <C-h> <Left>
 imap <C-l> <Right>
 nnoremap j gj
@@ -69,8 +67,11 @@ set stl+=%-14.(%l,%c%V%)\ %P
 set scrolloff=10
 
 " jump to same indent line
-nn <C-k> k:call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
-nn <C-j> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^
+"nn <C-k> :call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
+"nn <C-j> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^
+nnoremap <C-k> k:call search ('^\s\{,' . (col('.') - 1). '}\S', 'b')<CR>^
+nnoremap <C-j> :call search ('^\s\{,' . (col('.') - 1). '}\S')<CR>^
+" '^\\s\\{,4}\\S'
 
 " Anywhere SID.
 function! s:SID_PREFIX()
@@ -97,6 +98,7 @@ function! s:my_tabline()  "{{{
   let s .= '%#TabLineFill#%T%=%#TabLine#'
   return s
 endfunction "}}}
+"let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2
 
@@ -114,7 +116,7 @@ for n in range(1, 9)
 endfor
 "}}}
 
-map <silent> [Tag]c :tablast<CR>:tabnew<CR>
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
 map <silent> [Tag]x :tabclose<CR>
 map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
@@ -133,13 +135,13 @@ NeoBundle 'tpope/vim-rails.git'
 NeoBundle 'Railscasts-Theme-GUIand256color'
 colorscheme railscasts
 NeoBundleLazy 'ZenCoding.vim', 'abdc4cf2062e546dab80ea53d2feb4118d00c5d8', { 'autoload' : {
-    \ 'filetypes' : ['eruby', 'scss', 'css', 'html'],
+    \ 'filetypes' : ['eruby', 'scss', 'css', 'html', 'scss.css']
     \ }}
 
 NeoBundle 'EnhCommentify.vim'
 NeoBundle 'Shougo/neocomplcache'
 let g:neocomplcache_enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 "Enable heavy omni completion.
@@ -164,7 +166,7 @@ NeoBundle 'surround.vim'
 "    \ }}
 let ruby_space_errors=1
 NeoBundleLazy 'wadako111/vim-coffee-script', { 'autoload' : {
-    \ 'filetypes' : 'coffee'
+    \ 'filetypes' : ['coffee', 'eco']
     \ }}
 
 NeoBundle 'thinca/vim-quickrun.git'
@@ -228,7 +230,9 @@ map <silent> sp :call YanktmpPaste_p()<CR>
 map <silent> sP :call YanktmpPaste_P()<CR>
 
 NeoBundle 'yuratomo/w3m.vim'
-NeoBundle "basyura/unite-rails"
+"NeoBundle "basyura/unite-rails"
+
+"NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload' : {'filetypes' : ['scss', 'scss.css'] }}
 
 "haskell
 NeoBundleLazy "dag/vim2hs",                  {"autoload" : { "filetypes" : ["haskell"] }}
@@ -237,6 +241,73 @@ NeoBundleLazy "eagletmt/unite-haddock",      {"autoload" : { "filetypes" : ["has
 NeoBundleLazy "ujihisa/neco-ghc",            {"autoload" : { "filetypes" : ["haskell"] }}
 NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
 autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+
+" textobj
+" http://d.hatena.ne.jp/osyo-manga/20130717/1374069987
+" textobj まとめ
+NeoBundle 'kana/vim-textobj-user'
+" snake_case 上の word
+" a,w, i,w
+NeoBundle 'h1mesuke/textobj-wiw'
+
+let g:neosnippet#snippets_directory='~/.vim/snippets'
+NeoBundle 'Shougo/neosnippet'
+" <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" SuperTab like snippets behavior.
+" imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+inoremap <expr><C-e> neocomplcache#cancel_popup()
+inoremap <expr><C-y> neocomplcache#close_popup()
+
+" 突然の死コマンド
+command! -nargs=1 Totuzen call g:totuzen(<args>) 
+ 
+" 突然の死ジェネレート関数
+function! g:totuzen(str)
+  " 文字列(バイト数)を取得
+  let char_num = strlen(a:str)
+  " 実際の文字数を取得
+  let mchar_num = s:mojisu(a:str)
+ 
+  " かな／漢字が含まれるときの処理
+  if (char_num != mchar_num)
+    " utf-8は3バイトなので、差分÷2がかな/漢字文字の文字数
+  " かな/漢字文字はアルファベット2文字分の幅として扱う
+    let mchar_num += (char_num - mchar_num)/2
+  endif
+ 
+  let str = '＞　'.a:str.'　＜'
+  let top = '＿人'
+  let bottom = '￣Y^'
+ 
+  let slen = range(mchar_num/2)
+  for e in slen
+    let top = top.'人'
+    let bottom = bottom.'Y^'
+  endfor
+ 
+  let top = top.'人＿'
+  let bottom = bottom.'Y￣'
+ 
+  echo top
+  echo str
+  echo bottom
+endfunction
+ 
+" 実際の文字数を取得
+function! s:mojisu(str)
+  return strlen(substitute(a:str,".","x","g"))
+endfunction
 
 filetype plugin indent on
 filetype on
