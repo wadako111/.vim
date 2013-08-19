@@ -33,6 +33,7 @@ set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
 set backspace=indent,eol,start
+set cursorline
 " swapファイルを作成しない
 set noswapfile
 " タブ幅
@@ -49,8 +50,8 @@ match ZenkakuSpace /　/
 "
 imap <C-h> <Left>
 imap <C-l> <Right>
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " indentで折りたたみをする
 set foldmethod=indent
@@ -73,6 +74,9 @@ nnoremap <C-k> k:call search ('^\s\{,' . (col('.') - 1). '}\S', 'b')<CR>^
 nnoremap <C-j> :call search ('^\s\{,' . (col('.') - 1). '}\S')<CR>^
 " '^\\s\\{,4}\\S'
 
+    " hogehoge
+
+    " fooofoo
 " Anywhere SID.
 function! s:SID_PREFIX()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
@@ -132,8 +136,6 @@ call neobundle#rc(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'tpope/vim-rails.git'
-NeoBundle 'Railscasts-Theme-GUIand256color'
-colorscheme railscasts
 NeoBundleLazy 'ZenCoding.vim', 'abdc4cf2062e546dab80ea53d2feb4118d00c5d8', { 'autoload' : {
     \ 'filetypes' : ['eruby', 'scss', 'css', 'html', 'scss.css']
     \ }}
@@ -269,45 +271,42 @@ endif
 inoremap <expr><C-e> neocomplcache#cancel_popup()
 inoremap <expr><C-y> neocomplcache#close_popup()
 
-" 突然の死コマンド
-command! -nargs=1 Totuzen call g:totuzen(<args>) 
- 
-" 突然の死ジェネレート関数
-function! g:totuzen(str)
-  " 文字列(バイト数)を取得
-  let char_num = strlen(a:str)
-  " 実際の文字数を取得
-  let mchar_num = s:mojisu(a:str)
- 
-  " かな／漢字が含まれるときの処理
-  if (char_num != mchar_num)
-    " utf-8は3バイトなので、差分÷2がかな/漢字文字の文字数
-  " かな/漢字文字はアルファベット2文字分の幅として扱う
-    let mchar_num += (char_num - mchar_num)/2
-  endif
- 
-  let str = '＞　'.a:str.'　＜'
-  let top = '＿人'
-  let bottom = '￣Y^'
- 
-  let slen = range(mchar_num/2)
-  for e in slen
-    let top = top.'人'
-    let bottom = bottom.'Y^'
-  endfor
- 
-  let top = top.'人＿'
-  let bottom = bottom.'Y￣'
- 
-  echo top
-  echo str
-  echo bottom
-endfunction
- 
-" 実際の文字数を取得
-function! s:mojisu(str)
-  return strlen(substitute(a:str,".","x","g"))
-endfunction
+" twitter
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'basyura/TweetVim'
+nnoremap <leader>s :TweetVimCommandSay<CR>
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/livestyle-vim'
+" color scheme
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'vim-scripts/rdark'
+NeoBundle 'Zenburn'
+NeoBundle 'desert.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'Railscasts-Theme-GUIand256color'
+colorscheme railscasts
+set background=dark
+"let g:solarized_termcolors=256
+" jk
+NeoBundleLazy 'rhysd/accelerated-jk', { 'autoload' : {
+      \ 'mappings' : ['<Plug>(accelerated_jk_j)',
+      \               '<Plug>(accelerated_jk_k)'],
+      \ }}
+if neobundle#is_installed('accelerated-jk')
+  " accelerated-jk
+  nmap <silent>j <Plug>(accelerated_jk_j)
+  nmap gj j
+  nmap <silent>k <Plug>(accelerated_jk_k)
+  nmap gk k
+endif
+
+
 
 filetype plugin indent on
 filetype on
