@@ -27,13 +27,14 @@ set laststatus=2
 set confirm
 set visualbell
 set t_vb=
-set mouse=a
+set mouse=""
 set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 set listchars=tab:»-,trail:-,eol:↲
 set t_Co=256
 set backspace=indent,eol,start
-set cursorline
+"set relativenumber
+"set cursorline
 " swapファイルを作成しない
 set noswapfile
 " タブ幅
@@ -70,13 +71,16 @@ set scrolloff=10
 " jump to same indent line
 "nn <C-k> :call search ("^". matchstr (getline (line (".")+ 1), '\(\s*\)') ."\\S", 'b')<CR>^
 "nn <C-j> :call search ("^". matchstr (getline (line (".")), '\(\s*\)') ."\\S")<CR>^
-nnoremap <C-k> k:call search ('^\s\{,' . (col('.') - 1). '}\S', 'b')<CR>^
-nnoremap <C-j> :call search ('^\s\{,' . (col('.') - 1). '}\S')<CR>^
+nnoremap g{ :call <SID>search_top()<CR>^
+"nnoremap <C-j> :call search ('^\s\{,' . (col('.') - 1). '}\S')<CR>^
+nnoremap g} :call search ('^\s\{,' . (col('.') - 1). '}\S')<CR>^
 " '^\\s\\{,4}\\S'
+function! s:search_top()
+  let spaces = col('.')
+  execute line(".") - 1
+  call search ('^\s\{,' . (spaces - 1). '}\S', 'b')
+endfunction
 
-    " hogehoge
-
-    " fooofoo
 " Anywhere SID.
 function! s:SID_PREFIX()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
@@ -124,6 +128,74 @@ map <silent> [Tag]c :tablast <bar> tabnew<CR>
 map <silent> [Tag]x :tabclose<CR>
 map <silent> [Tag]n :tabnext<CR>
 map <silent> [Tag]p :tabprevious<CR>
+
+" crusorline
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+
+  let s:cursorline_lock = 0
+  function! s:auto_cursorline(event)
+    if a:event ==# 'WinEnter'
+      setlocal cursorline
+      let s:cursorline_lock = 2
+    elseif a:event ==# 'WinLeave'
+      setlocal nocursorline
+    elseif a:event ==# 'CursorMoved'
+      if s:cursorline_lock
+        if 1 < s:cursorline_lock
+          let s:cursorline_lock = 1
+        else
+          setlocal nocursorline
+          let s:cursorline_lock = 0
+        endif
+      endif
+    elseif a:event ==# 'CursorHold'
+      setlocal cursorline
+      let s:cursorline_lock = 1
+    endif
+  endfunction
+augroup END
+
+" easy escape
+inoremap jj <ESC>
+onoremap jj <ESC>
+inoremap j<Space> j
+onoremap j<Space> j
+
+" a>, i], etc... "{{{
+" <angle>
+onoremap aa  a>
+xnoremap aa  a>
+onoremap ia  i>
+xnoremap ia  i>
+
+" [rectangle]
+onoremap ar  a]
+xnoremap ar  a]
+onoremap ir  i]
+xnoremap ir  i]
+
+" 'quote'
+onoremap aq  a'
+xnoremap aq  a'
+onoremap iq  i'
+xnoremap iq  i'
+
+" "double quote"
+onoremap ad  a"
+xnoremap ad  a"
+onoremap id  i"
+xnoremap id  i"
+"}}}
+
+" Clear highlight.
+nnoremap <ESC><ESC> :nohlsearch<CR>
+
+
 
 filetype off
 
@@ -295,16 +367,17 @@ set background=dark
 "let g:solarized_termcolors=256
 " jk
 NeoBundleLazy 'rhysd/accelerated-jk', { 'autoload' : {
-      \ 'mappings' : ['<Plug>(accelerated_jk_j)',
-      \               '<Plug>(accelerated_jk_k)'],
+      \ 'mappings' : ['<Plug>(accelerated_jk_gj)',
+      \               '<Plug>(accelerated_jk_gk)'],
       \ }}
 if neobundle#is_installed('accelerated-jk')
   " accelerated-jk
-  nmap <silent>j <Plug>(accelerated_jk_j)
+  nmap <silent>j <Plug>(accelerated_jk_gj)
   nmap gj j
-  nmap <silent>k <Plug>(accelerated_jk_k)
+  nmap <silent>k <Plug>(accelerated_jk_gk)
   nmap gk k
 endif
+let g:accelerated_jk_acceleration_limit = 300
 
 
 
