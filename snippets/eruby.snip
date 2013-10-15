@@ -1,0 +1,13 @@
+include ./html.snip
+
+snippet <
+  <%${1} %>
+
+snippet end
+options indent
+  <% end %>
+
+snippet if
+  <% if ${1} %>
+    ${2}
+  <% end %>
