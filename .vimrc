@@ -274,6 +274,8 @@ noremap [Space]l zo
 noremap [Space]i zMzv
 noremap [Space]rr zR
 noremap [Space]m zM
+" VimShellPop
+nnoremap <silent> [Space]; :<C-u>VimShellPop<CR>
 
 " Toggle options. "{{{
 function! ToggleOption(option_name)
@@ -371,13 +373,20 @@ nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ut :<C-u>Unite -buffer-name=files buffer file_mru file_rec/async file/new  <CR>
 nnoremap <silent> ,um :<C-u>Unite  file_mru <CR>
 nnoremap <silent> ,ug :<C-u>Unite grep:%:-iHRn<CR>
-nnoremap <silent> ,uc :<C-u>Unite file_rec/async:config/ <CR><C-u>
-nnoremap <silent> ,uj :<C-u>Unite file_rec/async:app/assets/javascripts/ <CR>
-nnoremap <silent> ,urc :<C-u>Unite file_rec/async:app/controllers/ <CR>
-nnoremap <silent> ,urm :<C-u>Unite file_rec/async:app/models/ <CR>
-nnoremap <silent> ,urv :<C-u>Unite file_rec/async:app/views/ <CR>
+nnoremap <silent> ,urc :<C-u>Unite file_rec/async:app/controllers/ -input=!admin<CR><Space>
+nnoremap <silent> ,urfc :<C-u>Unite file file/new -input=app/controllers/ <CR>
+nnoremap <silent> ,urm :<C-u>Unite file_rec/async:app/models/ -input=!admin <CR><Space>
+nnoremap <silent> ,urfm :<C-u>Unite file file/new -input=app/models/ <CR>
+nnoremap <silent> ,urv :<C-u>Unite file_rec/async:app/views/ -input=!admin <CR><Space>
+nnoremap <silent> ,urfv :<C-u>Unite file file/new -input=app/views/ <CR>
 nnoremap <silent> ,urs :<C-u>Unite file_rec/async:app/assets/stylesheets/ <CR>
-nnoremap <silent> ,uri :<C-u>Unite file_rec/async:config/initializers/ <CR>
+nnoremap <silent> ,urfs :<C-u>Unite file file/new -input=app/assets/stylesheets/ <CR>
+nnoremap <silent> ,urj :<C-u>Unite file_rec/async:app/assets/javascripts/ <CR>
+nnoremap <silent> ,urfj :<C-u>Unite file file/new -input=app/assets/javascripts/ <CR>
+nnoremap <silent> ,uro :<C-u>Unite file_rec/async:config/ <CR>
+nnoremap <silent> ,urfo :<C-u>Unite file file/new -input=config/ <CR>
+nnoremap <silent> ,url :<C-u>Unite file_rec/async:lib/ <CR>
+nnoremap <silent> ,urfl :<C-u>Unite file file/new -input=lib/ <CR>
 
 NeoBundle 'tpope/vim-fugitive'
 
