@@ -276,6 +276,8 @@ noremap [Space]rr zR
 noremap [Space]m zM
 " VimShellPop
 nnoremap <silent> [Space]; :<C-u>VimShellPop<CR>
+" for vim-altr
+nmap [Space]al <Plug>(altr-forward)
 
 " Toggle options. "{{{
 function! ToggleOption(option_name)
@@ -292,7 +294,7 @@ function! ToggleVariable(variable_name)
   echo printf('%s = %s', a:variable_name, eval(a:variable_name))
 endfunction  "}}}
 
-set re=1
+"set re=1
 
 filetype off
 
@@ -340,9 +342,6 @@ NeoBundleLazy 'wadako111/vim-coffee-script', { 'autoload' : {
     \ 'filetypes' : ['coffee', 'eco']
     \ }}
 
-NeoBundle 'thinca/vim-quickrun.git'
-let g:quickrun_config = {}
-let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
 NeoBundle 'tpope/vim-endwise.git'
 "NeoBundle 'mru.vim'
 NeoBundle 'othree/html5.vim'
@@ -387,6 +386,9 @@ nnoremap <silent> ,uro :<C-u>Unite file_rec/async:config/ <CR>
 nnoremap <silent> ,urfo :<C-u>Unite file file/new -input=config/ <CR>
 nnoremap <silent> ,url :<C-u>Unite file_rec/async:lib/ <CR>
 nnoremap <silent> ,urfl :<C-u>Unite file file/new -input=lib/ <CR>
+nnoremap <silent> ,urr :<C-u>Unite file_rec/async:spec/ <CR>
+nnoremap <silent> ,urfr :<C-u>Unite file file/new -input=spec/ <CR>
+NeoBundle 'h1mesuke/unite-outline'
 
 NeoBundle 'tpope/vim-fugitive'
 
@@ -509,7 +511,49 @@ set foldtext=FoldCCtext()
 hi Folded gui=bold term=standout ctermbg=233 ctermfg=244
 hi FoldColumn gui=bold term=standout ctermbg=LightGrey ctermfg=DarkBlue
 
+NeoBundle 'SingleCompile'
+NeoBundleLazy 'thinca/vim-quickrun', { 'autoload' : {
+      \ 'mappings' : [
+      \   ['nxo', '<Plug>(quickrun)']],
+      \ }}
+nmap <silent> <Leader>r <Plug>(quickrun)
+let g:quickrun_config = {
+  \ "_" : {
+  \     "runner" : "vimproc",
+  \     "runner/vimproc/updatetime" : 60
+  \   },
+  \ "coffee" : {
+  \     "command" : "coffee",
+  \     "exec" : ["%c -cbp %s"]
+  \   }
+  \ }
 
+" for ios app
+"NeoBundleLazy 'tokorom/clang_complete',
+"      \ {'autoload': {'filetypes': ['c', 'cpp', 'objc']}}
+"NeoBundleLazy 'tokorom/clang_complete-getopts-ios.git',
+"      \ {'autoload': {'filetypes': ['objc']}}
+NeoBundleLazy 'tokorom/cocoa.vim.git', 'syntax-only',
+      \ {'autoload': {'filetypes': ['objc']}}
+NeoBundle 'kana/vim-altr'
+"if !exists('g:neocomplcache_force_omni_patterns')
+"  let g:neocomplcache_force_omni_patterns = {}
+"endif
+"let g:neocomplcache_force_overwrite_completefunc = 1
+"let g:neocomplcache_force_omni_patterns.c =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplcache_force_omni_patterns.cpp =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplcache_force_omni_patterns.objc =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplcache_force_omni_patterns.objcpp =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:clang_complete_auto = 0
+"let g:clang_auto_select = 0
+"let g:clang_auto_user_options = 'path, .clang_complete, ios'
+"let g:clang_complete_getopts_ios_sdk_directory = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk'
+"let g:clang_use_library = 0
+"let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
 
 filetype plugin indent on
 filetype on
